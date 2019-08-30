@@ -1,0 +1,131 @@
+createdAt: "2018-12-19T14:44:27.989Z"
+updatedAt: "2018-12-19T14:45:06.989Z"
+type: "MARKDOWN_NOTE"
+folder: "5501cfc56791ef9ddd08"
+title: "centos7安装docker的centos7镜像"
+content: '''
+  # centos7安装docker的centos7镜像
+  
+  ##################################################################
+      tee -a /etc/sysctl.conf <<-EOF
+      net.bridge.bridge-nf-call-ip6tables = 1
+      net.bridge.bridge-nf-call-iptables = 1
+      EOF
+  
+  ##################################################################
+      https://blog.csdn.net/gk11223/article/details/81503231 
+      现象：
+  
+      docker exec -it 7c5a2350c4cb /bin/bash
+      Error response from daemon: Container 7c5a2350c4cb2370d8aba94eef9cec4a6c2ac3207030961637072be82a4e9d64 is not running。
+  
+      解决：
+  
+      docker start 5ec54ba35b1e
+  
+  ##################################################################
+      docker安装centos后没有ifconfig命令解决办法
+  
+      使用Docker pull centos命令下载下来的centos镜像是centos7的最小安装包，里面并没有携带ifconfig命令，导致我想查看容器内的ip时不知道该怎么办，google了一下发现了一下命令
+  
+  
+  
+      [plain] view plain copy
+      yum provides ifconfig
+      yum whatprovides ifconfig
+  
+  
+      示例输出如下所示
+      [plain] view plain copy
+      Loaded plugins: fastestmirror  
+      Loading mirror speeds from cached hostfile  
+       * base: centos.aol.in  
+       * extras: centos.aol.in  
+       * updates: centos.aol.in  
+      net-tools-2.0-0.17.20131004git.el7.x86_64 : Basic networking tools  
+      Repo        : @base  
+      Matched from:  
+      Filename    : /usr/sbin/ifconfig  
+  
+      以上两个命令时用于输出哪些包包含我们要查找的文件，从结果可以看到，我们要找的包是：net-tools
+  
+  
+      因此，再输入
+  
+      [plain] view plain copy
+      yum install net-tools
+      安装完成后就可以使用ifconfig命令了
+  
+  ##############################################################
+      wget https://releases.hashicorp.com/consul/1.4.0/consul_1.4.0_linux_amd64.zip
+      wget https://releases.hashicorp.com/consul/0.8.1/consul_0.8.1_linux_amd64.zip?_ga=2.37003621.454120034.1493952927-625263640.1493952912
+  
+  ##############################################################
+  set tabstop=4
+  set softtabstop=4
+  set shiftwidth=4
+  set expandtab
+  
+  ##############################################################
+  cp {CentOS7-Base-163.repo,Centos-7.repo} /etc/yum.repos.d/
+  
+  yum clean all
+  yum makecache
+  yum list | grep epel-release
+  yum install -y epel-release
+  
+  wget -O /etc/yum.repos.d/epel-7.repo http://mirrors.aliyun.com/repo/epel-7.repo
+  
+  yum clean all
+  yum makecache
+  yum repolist enabled
+  yum repolist all
+  
+  yum install -y net-tools
+  yum install -y iproute
+  yum install -y unzip
+  
+  ##############################################################
+  unzip /home/consul_1.4.0_linux_amd64.zip
+  mv /home/consul /usr/local/bin
+  
+  local_ip=$(ifconfig | grep -oP "172.17.0.\\d{0,3}")
+  echo $local_ip
+  consul agent -server -bootstrap-expect=1 -data-dir=/tmp/consul -node=${local_ip} -bind=${local_ip} -datacenter=dc1 -ui >> /home/start.log 2>&1&
+  
+  consul members
+  ps aux | grep consul
+  consul kv put xxx 1
+  consul kv get xxx
+  
+  ##############################################################
+  docker build -t mybase:0.1 .
+  
+  ##############################################################
+  consul UI用127可以访问，指定ip无法访问
+  ./consul agent -dev -client 0.0.0.0 -ui
+  需要加上 -client 0.0.0.0 才能指定ip访问
+  
+  ##############################################################
+  docker run -d --net=host consul agent -server -ui -bind=<external ip> -client=<bridge ip> -retry-join=<root agent ip>
+  
+  ##############################################################
+  docker run -it -d --name consul_1 -p 192.168.56.101:8500:8500 mydocker:0.2
+  docker run -it -d --name consul_2 -p 192.168.56.101:8501:8500 mydocker:0.2
+  docker run -it -d --name consul_3 -p 192.168.56.101:8502:8500 mydocker:0.2
+  
+  ##############################################################
+  docker run -it -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup mydocker:0.1 /usr/sbin/init
+  docker run -it -d --privileged=true mydocker:0.2 /usr/sbin/init
+  docker run -it -d --privileged=true -p 8500:8500 mydocker:1.0 /usr/sbin/init
+  
+  ##############################################################
+  consul join 172.17.0.2 172.17.0.3 172.17.0.4
+  
+  ##############################################################
+'''
+tags: [
+  "docker"
+]
+isStarred: false
+isTrashed: false

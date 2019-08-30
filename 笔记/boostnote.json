@@ -1,0 +1,20 @@
+{
+  "folders": [
+    {
+      "key": "9da2ed4ff7ad3715fccb",
+      "color": "#E10051",
+      "name": "Linux命令"
+    },
+    {
+      "key": "5501cfc56791ef9ddd08",
+      "color": "#30D5C8",
+      "name": "docker"
+    },
+    {
+      "key": "2a33fecc86fdf3ac6bfa",
+      "color": "#3FD941",
+      "name": "感悟"
+    }
+  ],
+  "version": "1.0"
+}

@@ -1,0 +1,25 @@
+createdAt: "2019-03-18T23:20:50.680Z"
+updatedAt: "2019-03-18T23:24:01.391Z"
+type: "MARKDOWN_NOTE"
+folder: "b7f02990d62278d2a06f"
+title: "工作中的技术栈"
+tags: []
+content: '''
+  # 工作中的技术栈
+  
+  ### 工作中涉及的技术
+  1. consul
+  2. java
+  3. nginx
+  4. python
+  
+  ### x
+  1. 技术是立身之本啊
+  2. 当前可以围绕工作深钻技术
+  3. 列一列工作中需要那些：Java、consul、python、rpm、spec、nginx
+  4. 列一列基础的一些技术能力：http、https、ssl、ssh、rpc、nginx、tomcat
+  5. 英语
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

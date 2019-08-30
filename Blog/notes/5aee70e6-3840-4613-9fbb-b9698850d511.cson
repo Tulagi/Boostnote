@@ -1,0 +1,24 @@
+createdAt: "2019-08-24T02:06:26.655Z"
+updatedAt: "2019-08-24T02:06:58.859Z"
+type: "MARKDOWN_NOTE"
+folder: "5bde3d0994f35ed44380"
+title: "折叠长句"
+tags: []
+content: '''
+  # 折叠长句
+  
+  <details><summary>Boostnote是对应markdown记法的记事本，信息排序・共享的一种工具。</summary>
+  - Features - <br>
+  · Search function to find memos in one shot
+  · Supports markdown notation <br>
+  · Support for Mac, Windows, Linux, iOS, Android <br>
+  · Export and import to Plain text (.txt), Markdown (.md) format <br>
+  · Supports PDF saving <br>
+  · Can be used offline <br>
+  · Synchronize to dropbox etc. with setting <br>
+  · Supports theme colors and numerous fonts <br>
+  </details>
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

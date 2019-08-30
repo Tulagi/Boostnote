@@ -1,0 +1,69 @@
+createdAt: "2018-12-23T09:49:00.340Z"
+updatedAt: "2018-12-23T10:20:10.926Z"
+type: "MARKDOWN_NOTE"
+folder: "9da2ed4ff7ad3715fccb"
+title: "Centos7日常遇到的东西记录"
+tags: []
+content: '''
+  # Centos7日常遇到的东西记录
+  
+  ### 1.端口25占用
+  > `25` 端口默认开放给 `SMTP`（Simple Mail Transfer Protocol，简单邮件传输协议），用于发送邮件。
+  
+  ##### 查看25端口情况
+  ```
+  netstat -ntlp | grep 25
+  tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      1171/master
+  tcp6       0      0 ::1:25                  :::*                    LISTEN      1171/master
+  ```
+  
+  ##### 查看对应进程
+  ```
+  ps aux | grep 1171
+  root      1171  0.0  0.2  89544  2072 ?        Ss   16:18   0:00 /usr/libexec/postfix/master -w
+  ```
+  
+  ##### 查看 `postfix` 服务状态
+  ```
+  service postfix status
+  Redirecting to /bin/systemctl status postfix.service
+  ● postfix.service - Postfix Mail Transport Agent
+     Loaded: loaded (/usr/lib/systemd/system/postfix.service; enabled; vendor preset: disabled)
+     Active: active (running) since 日 2018-12-23 16:18:06 CST; 1h 44min ago
+    Process: 1026 ExecStart=/usr/sbin/postfix start (code=exited, status=0/SUCCESS)
+    Process: 1023 ExecStartPre=/usr/libexec/postfix/chroot-update (code=exited, status=0/SUCCESS)
+    Process: 1004 ExecStartPre=/usr/libexec/postfix/aliasesdb (code=exited, status=0/SUCCESS)
+   Main PID: 1171 (master)
+      Tasks: 3
+     Memory: 6.4M
+     CGroup: /system.slice/postfix.service
+             ├─ 1171 /usr/libexec/postfix/master -w
+             ├─ 1187 qmgr -l -t unix -u
+             └─13416 pickup -l -t unix -u
+  
+  12月 23 16:17:54 localhost.localdomain systemd[1]: Starting Postfix Mail Transport Agent...
+  12月 23 16:18:06 localhost.localdomain postfix/postfix-script[1159]: starting the Postfix mail system
+  12月 23 16:18:06 localhost.localdomain postfix/master[1171]: daemon started -- version 2.10.1, co...ix
+  12月 23 16:18:06 localhost.localdomain systemd[1]: Started Postfix Mail Transport Agent.
+  Hint: Some lines were ellipsized, use -l to show in full.
+  ```
+  
+  ##### 停止 `postfix` 服务
+  ```
+  service postfix stop
+  ```
+  
+  ##### 禁止 `postfix` 服务开机启动
+  ```
+  systemctl disable postfix
+  systemctl is-enabled postfix
+  ```
+  
+  ### 2. 
+  
+  
+  
+  
+'''
+isStarred: false
+isTrashed: false

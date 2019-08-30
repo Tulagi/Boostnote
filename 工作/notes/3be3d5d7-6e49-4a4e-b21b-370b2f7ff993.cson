@@ -1,0 +1,24 @@
+createdAt: "2019-01-01T13:44:23.774Z"
+updatedAt: "2019-02-27T14:09:02.992Z"
+type: "MARKDOWN_NOTE"
+folder: "f21148a6f48a4ad2bc3d"
+title: "2019年1月份工作事项"
+tags: []
+content: '''
+  # 2019年1月份工作事项
+  
+  * [x] FCS场景dcm-agent和cloudagent启动解耦联调
+  * [x] 公有云自动化安装dcm-agent，方案输出，然后到浩总会议评审
+  * [ ] dcm-agent镜像层解耦开发
+  * [ ] demoservice生态建立，git库初始化并邮件知会服务回合
+  * [ ] 服务上线对齐与跟踪
+  * [ ] 服务上线问题定位
+  * [ ] 公共配置代码阅读
+  * [ ] DCM代码阅读
+  * [ ] ServiceCM+DCM修改配置流程熟悉
+  * [ ] 容器化知识串讲
+  * [ ] OMRP上线，现在内测意见都还没反馈，基线还没导入
+  
+'''
+isStarred: false
+isTrashed: false

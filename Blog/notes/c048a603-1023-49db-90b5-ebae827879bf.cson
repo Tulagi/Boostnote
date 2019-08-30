@@ -1,0 +1,26 @@
+createdAt: "2018-12-02T16:22:32.422Z"
+updatedAt: "2018-12-02T16:27:24.891Z"
+type: "MARKDOWN_NOTE"
+folder: "5bde3d0994f35ed44380"
+title: "vim常用操作"
+content: '''
+  # vim常用操作
+  
+  > VIM常用操作记录
+  
+  <!-- more -->
+  
+  ### 跳转到指定行
+  ```
+  行号 + gg
+  :行号 + Enter
+  ```
+  
+  ### 设置原样粘贴，不会自动缩进
+  ```
+  set paste
+  ```
+'''
+tags: []
+isStarred: false
+isTrashed: false

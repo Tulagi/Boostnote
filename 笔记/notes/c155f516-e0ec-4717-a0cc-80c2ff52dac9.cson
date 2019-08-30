@@ -1,0 +1,35 @@
+createdAt: "2018-12-23T09:32:01.788Z"
+updatedAt: "2018-12-23T12:27:25.219Z"
+type: "MARKDOWN_NOTE"
+folder: "9da2ed4ff7ad3715fccb"
+title: "Centos7常用命令"
+tags: []
+content: '''
+  # Centos7常用命令
+  
+  ### centos7防火墙放开端口
+  ``` bash
+  查看防火墙状态
+  firewall-cmd --state
+  systemctl status firewalld.service
+  
+  查看防火墙区域
+  firewall-cmd --get-active-zones
+  
+  放开80端口
+  firewall-cmd --zone=public --add-port=80/tcp --permanent
+  
+  重启防火墙
+  firewall-cmd --reload
+  
+  查看端口是否开启
+  firewall-cmd --query-port=80/tcp
+  
+  启停防火墙
+  systemctl stop firewalld.service
+  systemctl start firewalld.service
+  ```
+  
+'''
+isStarred: false
+isTrashed: false

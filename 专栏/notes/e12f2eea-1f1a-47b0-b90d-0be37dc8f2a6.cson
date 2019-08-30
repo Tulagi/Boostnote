@@ -1,0 +1,68 @@
+createdAt: "2019-03-17T23:41:44.563Z"
+updatedAt: "2019-03-22T00:15:30.266Z"
+type: "MARKDOWN_NOTE"
+folder: "6d7294932c2871f4527b"
+title: "Reading Doc of Consul"
+tags: []
+content: '''
+  # Reading Doc of Consul
+  
+  ## consul的端口
+  |  Use                              | Default Ports    | 
+  | --------------------------------- | ---------------- |
+  | DNS: The DNS server               | 8600             |
+  | HTTP: The HTTP API                | 8500             |
+  | HTTPS: The HTTPs API              | disabled (8501)* | 
+  | gRPC: The gRPC API                | disabled (8502)* | 
+  | LAN Serf: The Serf LAN port.      | 8301             | 
+  | Wan Serf: The Serf WAN port       | 8302             |
+  | server: Server RPC address        | 8300             | 
+  | Sidecar Proxy Min: Inclusive min port number to use for automatically assigned sidecar service registrations.   | 21000            | 
+  | Sidecar Proxy Max: Inclusive max port number to use for automatically assigned sidecar service registrations. | 21255            | 
+  
+  ## 多节点启动时，未达到预期节点数时consul日志打印
+  > 配置 `-bootstrap-expect` 参数使用
+  ```
+  [WARN] raft: EnableSingleNode disabled, and no known peers. Aborting election.
+  ```
+  
+  ## 集群启动后，节点加入，选主成功
+  ```
+  [INFO] consul: adding server foo (Addr: 127.0.0.2:8300) (DC: dc1)
+  [INFO] consul: adding server bar (Addr: 127.0.0.1:8300) (DC: dc1)
+  [INFO] consul: Attempting bootstrap with nodes: [127.0.0.3:8300 127.0.0.2:8300 127.0.0.1:8300]
+      ...
+  [INFO] consul: cluster leadership acquired
+  ```
+  
+                
+  
+  ## 术语表
+  1. Agent：常驻进程，有client和server模式，可以提供DNS或http借口，负责健康检查和保持服务间同步，通过 `consul agent` 启动。
+  2. client：client模式的agent，开销及占用资源少，参与 `Lan gossip pool` 协议。
+  3. server：服务器是一个具有扩展的职责集的代理，包括参与RAFT仲裁、维护集群状态、响应RPC查询、与其他数据中心交换 `WAN gossip` 以及将查询转发给领导者或远程数据中心。
+  4. 数据中心：私有、低延时、高带宽。
+  5. 一致性：有限状态机的一致性。
+  6. Gossip：流言协议，会员管理、故障检测、时间广播，基于Serf。
+  7. Lan Gossip：相同的本地区域网络或数据中心的所有节点；
+  8. Wan Gossip：仅包含Server节点，不同数据中心或通过互联网、广域网交流的Server节点。
+  9. RPC：远程调用。
+  
+  ## 架构图
+  ![2a0e3c06.png](:storage\\e12f2eea-1f1a-47b0-b90d-0be37dc8f2a6\\2a0e3c06.png)
+  
+  ## Raft-一致性协议
+  1. Log：记录，顺序及内容。记录是按顺序排列的条目序列。
+  2. FSM：有限状态机。
+  
+  ### 几种协议的参与者
+  1. Raft协议：一个数据中心是一个对等集，每个Server是一个对等端，仅数据中心的Server节点参与。
+  2. Gossip协议：Lan Gossip Pool是本数据中心的所有节点都参与的，Wan Gossip Pool是夸数据中心的仅各数据中心的Server节点参与。
+  
+  ### Consul中的gossip协议
+  Consul中的gossip协议是由consul公司自己的Serf产品来实现的，其作为一个库嵌入到consul中使用
+  
+'''
+linesHighlighted: []
+isStarred: false
+isTrashed: false

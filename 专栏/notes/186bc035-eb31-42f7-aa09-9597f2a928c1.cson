@@ -1,0 +1,35 @@
+createdAt: "2018-12-23T08:35:14.941Z"
+updatedAt: "2018-12-23T09:27:47.912Z"
+type: "MARKDOWN_NOTE"
+folder: "ec6b3b862dfc88569d90"
+title: "初尝nginx"
+tags: []
+content: '''
+  # 初尝nginx
+  
+  ### 下载nginx
+  ``` bash
+  wget http://nginx.org/download/nginx-1.14.2.tar.gz
+  ```
+  
+  ### 解压
+  ``` bash
+  tar -xvf nginx-1.14.2.tar.gz
+  ```
+  
+  ### 配置
+  ``` bash
+  ./configure --prefix=/home/tulagi/nginx/
+  ```
+  
+  ### 编译安装
+  ``` bash
+  make && make install
+  ```
+  > `make install` 会将编译后文件安装到 `configure --prefix` 指定的目录中。
+  > 如果是升级，不要执行 `make install` 覆盖替换，需要做些额外操作。
+  
+  ### 
+'''
+isStarred: false
+isTrashed: false
