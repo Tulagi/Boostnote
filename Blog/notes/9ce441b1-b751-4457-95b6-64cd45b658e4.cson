@@ -1,5 +1,5 @@
 createdAt: "2019-08-31T00:27:49.782Z"
-updatedAt: "2019-08-31T13:28:55.705Z"
+updatedAt: "2019-09-02T23:50:39.604Z"
 type: "MARKDOWN_NOTE"
 folder: "bd0e24270b95ba42866e"
 title: "测试hexo发布"
@@ -16,4 +16,4 @@ content: '''
 '''
 linesHighlighted: []
 isStarred: false
-isTrashed: false
+isTrashed: true

@@ -1,11 +1,15 @@
 createdAt: "2019-08-24T02:06:26.655Z"
-updatedAt: "2019-08-24T02:06:58.859Z"
+updatedAt: "2019-09-03T00:14:31.439Z"
 type: "MARKDOWN_NOTE"
 folder: "5bde3d0994f35ed44380"
-title: "折叠长句"
-tags: []
+title: "Markdown语法"
+tags: [
+  "markdown"
+]
 content: '''
-  # 折叠长句
+  # Markdown语法
+  
+  ### 折叠长句
   
   <details><summary>Boostnote是对应markdown记法的记事本，信息排序・共享的一种工具。</summary>
   - Features - <br>

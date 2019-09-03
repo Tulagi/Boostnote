@@ -1,5 +1,5 @@
 createdAt: "2018-12-02T16:22:32.422Z"
-updatedAt: "2018-12-02T16:27:24.891Z"
+updatedAt: "2019-09-03T00:14:25.035Z"
 type: "MARKDOWN_NOTE"
 folder: "5bde3d0994f35ed44380"
 title: "vim常用操作"
@@ -21,6 +21,9 @@ content: '''
   set paste
   ```
 '''
-tags: []
+tags: [
+  "vim"
+]
 isStarred: false
 isTrashed: false
+linesHighlighted: []

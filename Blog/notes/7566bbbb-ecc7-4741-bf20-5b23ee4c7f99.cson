@@ -1,14 +1,10 @@
 createdAt: "2018-12-02T13:13:28.906Z"
-updatedAt: "2018-12-13T14:51:43.825Z"
+updatedAt: "2019-09-03T00:13:59.573Z"
 type: "MARKDOWN_NOTE"
 folder: "5bde3d0994f35ed44380"
 title: "Hexo博客管理流程"
 content: '''
   # Hexo博客管理流程
-  
-  > 记录下使用hexo写博客的流程
-  
-  <!-- more -->
   
   ### Hexo静态博客写作与发布流程：
   
@@ -82,6 +78,58 @@ content: '''
       git commit -m "$(date)"
       git push origin hexo:hexo
       ```
+  
+  ### 精简流程，没上面那么麻烦
+  1. 写文档
+  2. 上传github
+  3. 执行脚本发布
+  ```
+  #!/bin/bash
+  
+  outDir=$1
+  boostnote_root=$2
+  
+  if [ ! -d "$outDir" ]; then
+      mkdir "$outDir"
+  fi
+  
+  for fileName in `ls ${boostnote_root}/notes/*.cson`; do
+  
+      id=`echo ${fileName} | sed -e 's%.*/\\(.*\\)\\.cson%\\1%p' | head -1`
+      title=`sed -n "/^title:/p" "$fileName" | head -1 | sed -e "s/title:\\s\\"\\(.*\\)\\"$/\\1/"`
+      date=`sed -n "/^createdAt:/p" "$fileName" | head -1 | sed -e "s/createdAt:\\s\\"\\(.*\\)T\\(.*\\)\\..*\\"$/\\1 \\2/"`
+      tags=`sed -n "/^tags:\\s\\[$/,/^\\]$/p" "$fileName" | sed '1d' | sed '$d' | sed 's/[ "]//g' | sed 's/^/  - /g'`
+      categories=`echo $tags | head -1`
+  
+      file="$outDir/$title.md"
+      echo "---" >> ${file}
+      echo "title: ${title}" >> ${file}
+      echo "categories:" >> ${file}
+      echo "${categories}" >> ${file}
+      echo "tags:" >> ${file}
+      echo "${tags}" >> ${file}
+      echo "date: ${date}" >> ${file}
+      echo "---" >> ${file}
+      echo -e "\\n" >> ${file}
+      echo "> ${title}" >> ${file}
+      echo -e "\\n" >> ${file}
+      echo '<!-- more -->' >> ${file}
+      echo -e "\\n" >> ${file}
+  
+      echo "`sed -n "/^content:\\s\'''$/,/^\'''$/p" $fileName | sed '1d' | sed '$d' | cut -b 3-`" >> ${file}
+  
+      sed -i 's/\\\\\\\\/\\\\/g' ${file}
+      sed -i "s%:storage\\\\\\\\.*\\\\\\\\\\(.*\\)%${title}/\\1%g" ${file}
+  
+      attachments_dir=$boostnote_root/attachments/$id
+      [ -d $attachments_dir ] && mkdir -p $outDir/$title/ && cp -r $attachments_dir/* $outDir/$title/
+  
+      echo "$title.md file created."
+  done
+  
+  git pull origin master
+  hexo clean && hexo g && hexo d
+  ```
 '''
 tags: [
   "blog"
@@ -89,3 +137,4 @@ tags: [
 ]
 isStarred: false
 isTrashed: false
+linesHighlighted: []
